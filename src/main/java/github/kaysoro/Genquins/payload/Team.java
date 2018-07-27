@@ -1,16 +1,25 @@
-package data;
+package github.kaysoro.Genquins.payload;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
+@JsonRootName("participant")
 public class Team {
-
-    public final static Team NONE = new Team();
+    @JsonProperty("id")
+    private String id;
+    @JsonProperty("name")
     private String name;
-    private List<String> players;
     private int matchNumber;
     private int goalAverage;
     private int victoryNumber;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -18,14 +27,6 @@ public class Team {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<String> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(List<String> players) {
-        this.players = players;
     }
 
     public int getMatchNumber() {
