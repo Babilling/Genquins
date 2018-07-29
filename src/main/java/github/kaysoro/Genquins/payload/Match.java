@@ -5,6 +5,11 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("match")
 public class Match {
+    public final static Match NONE = new Match();
+
+    public final static String STATE_OPEN = "open";
+    public final static String STATE_PENDING = "pending";
+    public final static String STATE_COMPLETE = "complete";
 
     @JsonProperty("player1_id")
     private String teamId1;
@@ -23,22 +28,6 @@ public class Match {
 
     @JsonProperty("scores_csv")
     private String scores;
-
-    public String getTeam1() {
-        return teamId1;
-    }
-
-    public void setTeam1(String team1) {
-        this.teamId1 = team1;
-    }
-
-    public String getTeam2() {
-        return teamId2;
-    }
-
-    public void setTeam2(String team2) {
-        this.teamId2 = team2;
-    }
 
     public int getRoundNumber() {
         return roundNumber;

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("participant")
 public class Team {
+    public final static Team NONE = new Team();
     @JsonProperty("id")
     private String id;
     @JsonProperty("name")
@@ -54,8 +55,8 @@ public class Team {
     }
 
     public static int compareTeams(Team team1, Team team2){
-        if (team1.getVictoryNumber() != team2.getVictoryNumber())
-            return team1.getVictoryNumber() - team2.getVictoryNumber();
-        return team1.getGoalAverage() - team2.getGoalAverage();
+        if (team2.getVictoryNumber() != team1.getVictoryNumber())
+            return team2.getVictoryNumber() - team1.getVictoryNumber();
+        return team2.getGoalAverage() - team1.getGoalAverage();
     }
 }

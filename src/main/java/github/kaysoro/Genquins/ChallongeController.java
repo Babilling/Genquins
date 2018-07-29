@@ -17,7 +17,7 @@ public class ChallongeController {
 
     private static final Logger logger = LoggerFactory.getLogger(ChallongeController.class);
 
-    @GetMapping("/{tournament}/currentRound")
+    @GetMapping("/{tournament}/round")
     public Mono<String> getMatchesFromCurrentRound(@PathVariable String tournament) {
        return challongeClient.getMatchesFromCurrentRound(tournament);
     }

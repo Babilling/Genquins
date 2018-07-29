@@ -34,9 +34,9 @@ public class ChallongeClient {
     }
 
 
-    public Mono<String> getMatchesFromCurrentRound(String tournament) {
+    public Mono<String> getMatchesFromCurrentRound(String tournamentId) {
          return webClient.get()
-                 .uri("/tournaments/tournament.json?include_participants=1&include_matches=1", tournament)
+                 .uri("/tournaments/{tournamentId}.json?include_participants=1&include_matches=1", tournamentId)
                  .retrieve()
                  .bodyToMono(ResponseNode.class)
                  .map(HTMLGenerator::generateTree);
@@ -44,7 +44,7 @@ public class ChallongeClient {
 
     public Mono<String> getChallongeLadder(String tournamentId) {
         return webClient.get()
-                .uri("/tournaments/tournament.json?include_participants=1&include_matches=1", tournamentId)
+                .uri("/tournaments/{tournamentId}.json?include_participants=1&include_matches=1", tournamentId)
                 .retrieve()
                 .bodyToMono(ResponseNode.class)
                 .map(HTMLGenerator::generateLadder);
