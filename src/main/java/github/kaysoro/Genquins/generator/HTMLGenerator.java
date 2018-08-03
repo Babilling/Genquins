@@ -33,19 +33,27 @@ public class HTMLGenerator {
                 .filter(match -> match.getRoundNumber() == currentRound)
                 .collect(Collectors.toList());
 
-        ContainerTag matchesToPlay = table().with(tr().with(h2().withText("Matchs à jouer")));
-        ContainerTag matchesPlayed = table().with(tr().with(h2().withText("Matchs joués")));
+        ContainerTag matchesToPlay = table().withStyle("width:100%;").with(tr().with(h2("Matchs à jouer").withStyle("Margin:0;line-height:100%;font-family:arial,'helvetica neue',helvetica,sans-serif;font-size:18px;font-style:normal;font-weight:normal;color:#333333")));
+        ContainerTag matchesPlayed = table().withStyle("width:100%;").with(tr().with(h2("Matchs joués").withStyle("Margin:0;line-height:100%;font-family:arial,'helvetica neue',helvetica,sans-serif;font-size:18px;font-style:normal;font-weight:normal;color:#333333")));
+
         for (Match match : matches) {
             if (match.getState().equals(Match.STATE_COMPLETE))
                 matchesPlayed.with(tr()
-                        .with(td(teams.get(match.getTeamId1()) + " VS " + teams.get(match.getTeamId2()) + " : "))
-                        .with(td("Victoire de " + teams.get(match.getWinnerId()) + " par " + match.getScores()))
+                        .with(td(teams.get(match.getTeamId1())).withStyle("text-align:center;background-color:#ffced7;border-radius:8px;border:3px solid #ff0033;color:#333333;"
+                                + (match.getWinnerId().equals(match.getTeamId1())?"font-weight: bold;":"text-decoration: line-through;")))
+                        .with(td(match.getScores()).withStyle("font-weight: bold;text-align:center;"))
+                        .with(td(teams.get(match.getTeamId2())).withStyle("text-align:center;background-color:#ffdaaa;border-radius:8px;border:3px solid orange;color:#333333;"
+                                + (match.getWinnerId().equals(match.getTeamId2())?"font-weight: bold;":"text-decoration: line-through;")))
                 );
             else
-                matchesToPlay.with(tr(teams.get(match.getTeamId1()) + " VS " + teams.get(match.getTeamId2())));
+                matchesToPlay.with(tr()
+                                .with(td(teams.get(match.getTeamId1())).withStyle("text-align:center;background-color:#c4efff;border-radius:8px;border:3px solid #147EEC;color:#333333;"))
+                                .with(td(" VS ").withStyle("font-weight: bold;text-align:center;"))
+                                .with(td(teams.get(match.getTeamId2())).withStyle("text-align:center;background-color:#e6c4ff;border-radius:8px;border:3px solid #8A1DB3;color:#333333;"))
+                );
         }
 
-        return tr().with(matchesPlayed).with(matchesToPlay).renderFormatted();
+        return p(join(matchesPlayed, br(), matchesToPlay)).renderFormatted();
     }
 
     public static String generateLadder(ResponseNode node) {
