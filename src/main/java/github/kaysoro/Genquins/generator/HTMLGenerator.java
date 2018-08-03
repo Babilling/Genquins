@@ -96,21 +96,24 @@ public class HTMLGenerator {
         }
 
         // La récupération des données de match est faite, on génère le classement
-        ContainerTag result = table().with(tr()
+        ContainerTag result = table().withStyle("width:100%;text-align:center;").with(tr().withStyle("background: linear-gradient(to right, #57A2F0 , #8A1DB3);color:white;font-weight:bold;line-height:100%;font-family:arial,'helvetica neue',helvetica,sans-serif;")
                 .with(th("Equipe"))
                 .with(th("Matchs"))
                 .with(th("Victoires"))
-                .with(th("Goal Average")))
-                .attr("border", "1");
-        teamsMap.values().stream()
+                .with(th("Goal Average")));
+        List<Team> teams = teamsMap.values().stream()
                 .sorted(Team::compareTeams)
-                .collect(Collectors.toList()).forEach(team -> result.with(tr()
-                .with(td(team.getName()))
-                .with(td(String.valueOf(team.getMatchNumber())))
-                .with(td(String.valueOf(team.getVictoryNumber()))
-                .with(td(String.valueOf(team.getGoalAverage()))))
-        ));
+                .collect(Collectors.toList());
+        int pair = 0;
+        for(Team team : teams) {
+            result.with(tr().withStyle(++pair%2==0? "background-color:#ededed":"")
+                    .with(td(team.getName()).withStyle("text-align:left;line-height:100%;font-family:arial,'helvetica neue',helvetica,sans-serif;color:#333333"))
+                    .with(td(String.valueOf(team.getMatchNumber())).withStyle("line-height:100%;font-family:arial,'helvetica neue',helvetica,sans-serif;color:#333333"))
+                    .with(td(String.valueOf(team.getVictoryNumber())).withStyle("line-height:100%;font-family:arial,'helvetica neue',helvetica,sans-serif;color:#333333"))
+                    .with(td(String.valueOf(team.getGoalAverage())).withStyle("line-height:100%;font-family:arial,'helvetica neue',helvetica,sans-serif;color:#333333"))
+            );
+        }
 
-        return tr().withText("Classement").with(result).renderFormatted();
+        return result.renderFormatted();
     }
 }
