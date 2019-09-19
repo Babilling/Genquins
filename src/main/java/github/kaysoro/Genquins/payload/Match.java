@@ -15,45 +15,45 @@ public class Match {
     private String id;
 
     @JsonProperty("player1_id")
-    private String teamId1;
+    private String player1_id;
 
     @JsonProperty("player2_id")
-    private String teamId2;
+    private String player2_id;
 
     @JsonProperty("state")
     private String state;
 
     @JsonProperty("winner_id")
-    private String winnerId;
+    private String winner_id;
 
     @JsonProperty("round")
-    private int roundNumber;
+    private int round;
 
     @JsonProperty("scores_csv")
-    private String scores;
+    private String scores_csv;
 
-    public int getRoundNumber() {
-        return roundNumber;
+    public int getRound() {
+        return round;
     }
 
-    public void setRoundNumber(int roundNumber) {
-        this.roundNumber = roundNumber;
+    public void setRound(int round) {
+        this.round = round;
     }
 
-    public String getTeamId1() {
-        return teamId1;
+    public String getPlayer1_id() {
+        return player1_id;
     }
 
-    public void setTeamId1(String teamId1) {
-        this.teamId1 = teamId1;
+    public void setPlayer1_id(String player1_id) {
+        this.player1_id = player1_id;
     }
 
-    public String getTeamId2() {
-        return teamId2;
+    public String getPlayer2_id() {
+        return player2_id;
     }
 
-    public void setTeamId2(String teamId2) {
-        this.teamId2 = teamId2;
+    public void setPlayer2_id(String player2_id) {
+        this.player2_id = player2_id;
     }
 
     public String getState() {
@@ -64,20 +64,20 @@ public class Match {
         this.state = state;
     }
 
-    public String getWinnerId() {
-        return winnerId;
+    public String getWinner_id() {
+        return winner_id;
     }
 
-    public void setWinnerId(String winnerId) {
-        this.winnerId = winnerId;
+    public void setWinner_id(String winner_id) {
+        this.winner_id = winner_id;
     }
 
-    public String getScores() {
-        return scores;
+    public String getScores_csv() {
+        return scores_csv;
     }
 
-    public void setScores(String scores) {
-        this.scores = scores;
+    public void setScores_csv(String scores_csv) {
+        this.scores_csv = scores_csv;
     }
 
     public String getId() {
