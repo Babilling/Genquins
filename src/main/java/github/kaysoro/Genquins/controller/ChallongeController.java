@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -23,7 +26,7 @@ public class ChallongeController {
     }
 
     @GetMapping("/matches")
-    public Flux<MatchWrapper> getMatchesFromCurrentRound() {
+    public Mono<List<Match>> getMatchesFromCurrentRound() {
        return challongeClient.getAllMatchesForTournament();
     }
 
