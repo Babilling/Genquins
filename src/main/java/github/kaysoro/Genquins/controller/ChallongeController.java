@@ -1,30 +1,36 @@
-package github.kaysoro.Genquins;
+package github.kaysoro.Genquins.controller;
 
+import github.kaysoro.Genquins.payload.Match;
+import github.kaysoro.Genquins.service.ChallongeClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/api")
 public class ChallongeController {
 
-    @Autowired
     private ChallongeClient challongeClient;
 
     private static final Logger logger = LoggerFactory.getLogger(ChallongeController.class);
 
-    @GetMapping("/{tournament}/round")
-    public Mono<String> getMatchesFromCurrentRound(@PathVariable String tournament) {
-       return challongeClient.getMatchesFromCurrentRound(tournament);
+    public ChallongeController(ChallongeClient challongeClient){
+        this.challongeClient = challongeClient;
     }
 
-    @GetMapping("/{tournament}/ladder")
-    public Mono<String> getChallongeLadder(@PathVariable String tournament) {
-        return challongeClient.getChallongeLadder(tournament);
+    @GetMapping("/matches")
+    public Flux<Match> getMatchesFromCurrentRound() {
+       return challongeClient.getAllMatchesForTournament();
+    }
+
+    @GetMapping({ "/", "/index" })
+    public String index(Model model) {
+        model.addAttribute("matchs", challongeClient.getAllMatchesForTournament());
+        return "index";
     }
 
     @ExceptionHandler(WebClientResponseException.class)

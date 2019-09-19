@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Welcome</title>
+    </head>
+    <body>
+        <h1>Welcome</h1>
+        <div>
+            <table border="1">
+                <tr>
+                    <th>Id</th>
+                </tr>
+                <tr th:each ="match : ${matchs}">
+                    <td th:utext="${match.id}">...</td>
+                </tr>
+            </table>
+        </div>
+
+    </body>
+</html>

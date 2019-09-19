@@ -11,6 +11,9 @@ public class Match {
     public final static String STATE_PENDING = "pending";
     public final static String STATE_COMPLETE = "complete";
 
+    @JsonProperty("id")
+    private String id;
+
     @JsonProperty("player1_id")
     private String teamId1;
 
@@ -75,5 +78,13 @@ public class Match {
 
     public void setScores(String scores) {
         this.scores = scores;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
