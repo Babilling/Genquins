@@ -11,9 +11,6 @@ import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunctions;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
-import java.util.List;
 
 @Service
 public class ChallongeClient {
@@ -38,13 +35,12 @@ public class ChallongeClient {
                 .build();
     }
 
-    public Mono<List<Match>> getAllMatchesForTournament() {
+    public Flux<Match> getAllMatchesForTournament() {
         return webClient.get()
                 .uri("/tournaments/{tournamentId}/matches.json", tournamentId)
                 .retrieve()
                 .bodyToFlux(MatchWrapper.class)
-                .map(MatchWrapper::getMatch)
-                .collectList();
+                .map(MatchWrapper::getMatch);
     }
 
     private ExchangeFilterFunction logRequest() {
