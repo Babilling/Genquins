@@ -1,6 +1,7 @@
 package github.kaysoro.Genquins.controller;
 
 import github.kaysoro.Genquins.payload.Match;
+import github.kaysoro.Genquins.payload.Participant;
 import github.kaysoro.Genquins.service.ChallongeClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,11 @@ public class ChallongeController {
     @GetMapping("/matches")
     public Flux<Match> getMatchesFromCurrentRound() {
        return challongeClient.getAllMatchesForTournament();
+    }
+
+    @GetMapping("/participants")
+    public Flux<Participant> getParticipants() {
+        return challongeClient.getAllParticipantsForTournament();
     }
 
     @ExceptionHandler(WebClientResponseException.class)

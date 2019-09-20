@@ -2,6 +2,8 @@ package github.kaysoro.Genquins.service;
 
 import github.kaysoro.Genquins.payload.Match;
 import github.kaysoro.Genquins.payload.MatchWrapper;
+import github.kaysoro.Genquins.payload.Participant;
+import github.kaysoro.Genquins.payload.ParticipantWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,6 +43,14 @@ public class ChallongeClient {
                 .retrieve()
                 .bodyToFlux(MatchWrapper.class)
                 .map(MatchWrapper::getMatch);
+    }
+
+    public Flux<Participant> getAllParticipantsForTournament() {
+        return webClient.get()
+                .uri("/tournaments/{tournamentId}/participants.json", tournamentId)
+                .retrieve()
+                .bodyToFlux(ParticipantWrapper.class)
+                .map(ParticipantWrapper::getParticipant);
     }
 
     private ExchangeFilterFunction logRequest() {
