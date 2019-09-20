@@ -12,6 +12,7 @@ public class MatchMapper {
                 .participant2(ParticipantMapper.map(participantMap.get(match.getPlayer2_id())))
                 .winner_id(match.getWinner_id() != null ? participantMap.get(match.getWinner_id()).getName() : null)
                 .scores(match.getScores_csv())
+                .state(match.getState().equals(github.kaysoro.Genquins.payload.Match.STATE_COMPLETE) ? "Joué" : "Non joué")
                 .build();
     }
 }

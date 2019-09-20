@@ -12,5 +12,6 @@ public class Match {
     private Participant participant2;
     private String winner_id;
     private String scores;
+    private String state;
 
 }
