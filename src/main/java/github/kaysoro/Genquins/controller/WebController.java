@@ -1,11 +1,16 @@
 package github.kaysoro.Genquins.controller;
 
+import github.kaysoro.Genquins.mapper.MatchMapper;
+import github.kaysoro.Genquins.model.Match;
 import github.kaysoro.Genquins.service.ChallongeClient;
 import github.kaysoro.Genquins.service.MatchService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.stream.Collectors;
 
 @Controller
@@ -22,6 +27,12 @@ public class WebController {
     @GetMapping({ "/", "/index" })
     public String index(Model model) {
         model.addAttribute("matchs", matchService.getModelMatches());
+        model.addAttribute("matchToSave", Match.builder().build());
         return "index";
+    }
+
+    @PostMapping("/save")
+    public String save(Model model, Match matchToSave) {
+        return index(model);
     }
 }

@@ -53,25 +53,29 @@
                     <h4 class="modal-title">Rapporter les scores</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form action="#" th:action="@{/save}" th:object="${matchToSave}" method="post">
+                    <div class="modal-body">
                         <div class="form-group row">
-                            <label for="participant1Score" class="col-sm-2 col-form-label" id="participant1Name"></label>
+                            <label for="participant1Score" class="col-sm-2 col-form-label"
+                                   id="participant1Name"></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="participant1Score">
+                                <input type="number" class="form-control" id="participant1Score"
+                                       th:field="*{participant1.score}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="participant2Score" class="col-sm-2 col-form-label" id="participant2Name"></label>
+                            <label for="participant2Score" class="col-sm-2 col-form-label"
+                                   id="participant2Name"></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="participant2Score">
+                                <input type="number" class="form-control" id="participant2Score"
+                                       th:field="*{participant2.score}">
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">ENVOYER LES SCORES</button>
-                </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="submit" class="btn btn-warning">ENVOYER LES SCORES</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
