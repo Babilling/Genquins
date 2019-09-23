@@ -20,7 +20,6 @@
     <table id="matches" class="table table-bordered table-striped" style="width:100%">
         <thead>
         <tr>
-            <th>State</th>
             <th>Player 1</th>
             <th>Player 2</th>
             <th>Winner</th>
@@ -30,14 +29,13 @@
         </thead>
         <tbody id="match">
         <tr th:each="match : ${matchs}">
-            <td th:utext="${match.state}">...</td>
-            <td th:utext="${match.participant1.name}">...</td>
-            <td th:utext="${match.participant2.name}">...</td>
-            <td th:utext="${match.winner_id}">...</td>
-            <td th:utext="${match.scores}">...</td>
+            <td th:utext="${match.value.participant1.name}">...</td>
+            <td th:utext="${match.value.participant2.name}">...</td>
+            <td th:utext="${match.value.winner_id}">...</td>
+            <td th:utext="${match.value.scores}">...</td>
             <td>
                 <div style="text-align:center">
-                    <button th:attr="data-participant1-name=${match.participant1.name}, data-participant2-name=${match.participant2.name}, data-target='#scoresModal'"
+                    <button th:attr="data-matchId=${match.value.id}, data-target='#scoresModal'"
                             type="button" data-toggle="modal" class="btn btn-primary">
                         <i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i>
                     </button>
@@ -53,13 +51,13 @@
                     <h4 class="modal-title">Rapporter les scores</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="#" th:action="@{/save}" th:object="${matchToSave}" method="post">
+                <form id="saveForm" action="#" th:action="@{/save}" th:object="${matchs.get(matchId)}" method="post">
                     <div class="modal-body">
                         <div class="form-group row">
                             <label for="participant1Score" class="col-sm-2 col-form-label"
                                    id="participant1Name"></label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="participant1Score"
+                                <input type="number" max="10" class="form-control" id="participant1Score"
                                        th:field="*{participant1.score}">
                             </div>
                         </div>
@@ -67,7 +65,7 @@
                             <label for="participant2Score" class="col-sm-2 col-form-label"
                                    id="participant2Name"></label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" id="participant2Score"
+                                <input type="number" max="10" class="form-control" id="participant2Score"
                                        th:field="*{participant2.score}">
                             </div>
                         </div>
