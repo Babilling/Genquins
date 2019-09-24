@@ -17,8 +17,8 @@
 <body>
 <div class="container">
     <h1 class="animated tada" style="text-align:center;">Babigital Tournament</h1>
-    <table id="matches" class="table table-bordered table-striped" style="width:100%">
-        <thead>
+    <table id="matches" class="table table-bordered table-striped" style="width:100%;">
+        <thead style="text-align:center;">
         <tr>
             <th>Player 1</th>
             <th>Player 2</th>
@@ -29,13 +29,15 @@
         </thead>
         <tbody id="match">
         <tr th:each="match : ${matchs}">
-            <td th:utext="${match.value.participant1.name}">...</td>
-            <td th:utext="${match.value.participant2.name}">...</td>
-            <td th:utext="${match.value.winner_id}">...</td>
-            <td th:utext="${match.value.scores}">...</td>
+            <td th:utext="${match.participant1.name}">...</td>
+            <td th:utext="${match.participant2.name}">...</td>
+            <td th:utext="${match.winner_id}">...</td>
+            <td th:utext="${match.scores}" style="text-align:center;">...</td>
             <td>
                 <div style="text-align:center">
-                    <button th:attr="data-matchId=${match.value.id}, data-target='#scoresModal'"
+                    <button th:attr="data-participant1-name=${match.participant1.name}, data-participant2-name=${match.participant2.name},
+                     data-participant1-id=${match.participant1.id}, data-participant2-id=${match.participant2.id},
+                     data-match-id=${match.id}, data-target='#scoresModal'"
                             type="button" data-toggle="modal" class="btn btn-primary">
                         <i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i>
                     </button>
@@ -51,7 +53,10 @@
                     <h4 class="modal-title">Rapporter les scores</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form id="saveForm" action="#" th:action="@{/save}" th:object="${matchs.get(matchId)}" method="post">
+                <form id="saveForm" action="#" th:action="@{/save}" th:object="${matchToSave}" method="post">
+                    <input type="hidden" id="matchToSaveId" th:field="*{id}">
+                    <input type="hidden" id="matchToSaveParticipant1Id" th:field="*{participant1.id}">
+                    <input type="hidden" id="matchToSaveParticipant2Id" th:field="*{participant2.id}">
                     <div class="modal-body">
                         <div class="form-group row">
                             <label for="participant1Score" class="col-sm-2 col-form-label"
