@@ -10,19 +10,20 @@ input[type=number] {
 }
 
 body {
-    background-image: url("https://www.soprabanking.com/Public/Files/home_slider/visuel_annonce_fe9ee3e87d.jpg");
+    background-image: url("../img/soprabanking.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-color: black;
     color: white !important;
+    border-color: none !important;
 }
 
 h1 {
     font-family: Tungsten Book;
     font-size: 70px;
+    font-weight: 600 !important;
     line-height: 70px;
-    text-transform: uppercase;
     text-align: center;
 }
 
@@ -31,4 +32,32 @@ h1 {
     max-width: 70% !important;
     padding-right: 5% !important;
     padding-left: 5% !important;
+}
+
+.modal-content {
+    background-color: #303030 !important;
+    border: #999 solid 1px !important;
+}
+
+.close:not(:disabled):not(.disabled) {
+    color: #fff !important;
+}
+
+.page-item.active .page-link {
+    color: #f8981d !important;
+    background-color: #212529 !important;
+    border-color: #212529 !important;
+}
+
+.page-link {
+    color: black !important;
+    background-color: #f8981d !important;
+    border: 1px solid black !important;
+    font-weight: 700 !important;
+}
+
+.page-item.disabled .page-link {
+    color: #f8981d !important;
+    background-color: #212529 !important;
+    border: 1px solid #212529 !important;
 }
