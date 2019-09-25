@@ -8,3 +8,27 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
+
+body {
+    background-image: url("https://www.soprabanking.com/Public/Files/home_slider/visuel_annonce_fe9ee3e87d.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: black;
+    color: white !important;
+}
+
+h1 {
+    font-family: Tungsten Book;
+    font-size: 70px;
+    line-height: 70px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.container {
+    background-color: black;
+    max-width: 70% !important;
+    padding-right: 5% !important;
+    padding-left: 5% !important;
+}
