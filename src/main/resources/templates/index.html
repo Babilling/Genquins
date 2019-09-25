@@ -39,7 +39,7 @@
             <td th:utext="${match.scores}" style="text-align:center;">...</td>
             <td>
                 <div style="text-align:center">
-                    <button th:attr="data-participant1-name=${match.participant1.name}, data-participant2-name=${match.participant2.name},
+                    <button th:disabled="${match.winner_id != null}" th:attr="data-participant1-name=${match.participant1.name}, data-participant2-name=${match.participant2.name},
                      data-participant1-id=${match.participant1.id}, data-participant2-id=${match.participant2.id},
                      data-match-id=${match.id}, data-target='#scoresModal'"
                             type="button" data-toggle="modal" class="btn btn-warning">
