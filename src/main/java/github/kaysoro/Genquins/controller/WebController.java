@@ -36,4 +36,10 @@ public class WebController {
     public String save(Model model, Match matchToSave) {
         return "redirect:/";
     }
+
+    @GetMapping("/challonge")
+    public String challonge(Model model) {
+        return "challonge";
+    }
+
 }
