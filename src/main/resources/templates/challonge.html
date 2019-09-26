@@ -15,13 +15,18 @@
 </head>
 <body style="height:100%;">
 <div class="container" style="height:100%;">
-    <div style="text-align: center;">
-        <div style="display: inline-flex;padding: 5px;margin: auto;width: auto;" class="animated tada">
-            <h1 style="padding: 5px; */margin: ;padding: 3px;">Tournoi</h1>
-            <h1 style="background-color: #f8981d;border-radius: 7px;color: black;padding: 3px; margin-left: 5px;">Babigital</h1>
+    <div style="text-align: center;display: flex;">
+        <div class="animated tada title">
+            <h1 class="pron">Tournoi</h1>
+            <h1 class="hub">Babigital</h1>
+        </div>
+        <div style="position: relative; top: 10px; right: 0px;">
+            <button type="button" class="btn btn-warning" onclick="location.href='/'" title="Matchs et scores">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                Matchs
+            </button>
         </div>
     </div>
-    <input type="button" class="btn btn-warning" onclick="location.href='/'" value="Matchs" />
     <iframe src="https://challonge.com/fr/v3ordrcd/module" width="100%" style="height: calc(100% - 115px);" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
 </div>
 <script th:src="@{/js/jquery-3.3.1.js}"></script>

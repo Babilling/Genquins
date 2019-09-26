@@ -9,11 +9,6 @@ input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
 
-html {
-    min-height: 100%;
-    max-height: none;
-}
-
 body {
     background-image: url("../img/soprabanking.jpg");
     background-repeat: no-repeat;
@@ -87,4 +82,26 @@ select.form-control {
 
 a.page-link {
     box-shadow:none !important;
+}
+
+.title {
+    display: inline-flex;
+    padding: 5px;
+    margin: auto;
+    width: auto;
+}
+
+.pron  {
+    padding: 5px;
+    margin: ;
+    padding: 3px;
+}
+
+.hub {
+    background-color: #f8981d;
+    /*background-image: linear-gradient(to right, red , orange);*/
+    border-radius: 7px;
+    color: black;
+    padding: 3px;
+    margin-left: 5px;
 }
