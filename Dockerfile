@@ -7,8 +7,10 @@ ENV CHALLONGE_TOKEN 1
 ENV CHALLONGE_TOURNAMENT 1
 
 RUN cd /genquins &&\
-    sh mvnw install && \
-    cp /target/*.jar /genquins.jar && \
-    rm -rf /genquins
+    mvn install && \
+    cp target/*.jar /genquins.jar && \
+    rm -rf /genquins && \
+    rm -rf /root/.m2
 
-ENTRYPOINT ["java","-jar","/genquins.jar --challonge.username="${CHALLONGE_USERNAME}" --challonge.token="${CHALLONGE_TOKEN}" --challonge.tournament="${CHALLONGE_TOURNAMENT}""]
+CMD ["--challonge.username="${CHALLONGE_USERNAME}","--challonge.token="${CHALLONGE_TOKEN}","--challonge.tournament="${CHALLONGE_TOURNAMENT}"]
+ENTRYPOINT ["java","-jar","/genquins.jar"]
