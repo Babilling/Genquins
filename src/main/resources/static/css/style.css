@@ -98,8 +98,8 @@ a.page-link {
 }
 
 .hub {
-    background-color: #f8981d;
-    /*background-image: linear-gradient(to right, red , orange);*/
+    /*background-color: #f8981d;*/
+    /*background-image: linear-gradient(to right, red , #f8981d);*/
     border-radius: 7px;
     color: black;
     padding: 3px;

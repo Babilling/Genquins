@@ -19,3 +19,7 @@ $('#scoresModal').on('show.bs.modal', function (event) {
   modal.find('#matchToSaveParticipant1Id').val(par1ID)
   modal.find('#matchToSaveParticipant2Id').val(par2ID)
 });
+function pronify() {
+    document.getElementById("hub").removeAttribute("style");
+    document.getElementById("hub").style.backgroundColor="#f8981d";
+}
