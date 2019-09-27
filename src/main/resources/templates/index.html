@@ -7,7 +7,8 @@
     <title>Tournoi Babigital</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/dataTables.bootstrap4.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.bootstrap4.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/animate.min.css}">
@@ -20,8 +21,15 @@
             <h1 class="pron">Tournoi</h1>
             <h1 class="hub">Babigital</h1>
         </div>
+        <div style="position: relative; top: 10px; right: 10px;">
+            <button type="button" class="btn btn-warning" title="Règles" data-toggle="modal" data-target="#rulesModal">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                Règles
+            </button>
+        </div>
         <div style="position: relative; top: 10px; right: 0px;">
-            <button type="button" class="btn btn-warning" onclick="location.href='/challonge'" title="Classement et phases">
+            <button type="button" class="btn btn-warning" onclick="location.href='/challonge'"
+                    title="Classement et phases">
                 <i class="fa fa-list-ol" aria-hidden="true"></i>
                 Classement
             </button>
@@ -89,6 +97,28 @@
                         <button type="submit" class="btn btn-warning">ENVOYER LES SCORES</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="rulesModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Règles</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                    <p>&#9642; Tous les joueurs de chaque poule se rencontrent  une fois (aller)</p>
+                    <p>&#9642; Le gagnant d'un match est le premier arrivé à 10 points</p>
+                    <p>&#9642; Concernant les pissettes et les demis, les joueurs doivent se mettre d'accord entre eux avant le match</p>
+                    <p>&#9642; Idem pour les sacs/rateaux</p>
+                    <p>&#9642; Les gamelles comptent comme  +1 ou -1, au choix du buteur</p>
+                    <p><i>Départage : Nombre de matchs remportés, puis goal average, puis points marqués.</i></p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="submit" class="btn btn-warning" data-dismiss="modal">Fermer</button>
+                </div>
             </div>
         </div>
     </div>
