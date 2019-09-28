@@ -4,6 +4,7 @@ import github.kaysoro.Genquins.mapper.MatchMapper;
 import github.kaysoro.Genquins.model.Match;
 import github.kaysoro.Genquins.service.ChallongeClient;
 import github.kaysoro.Genquins.service.MatchService;
+import github.kaysoro.Genquins.service.TournamentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,14 +20,17 @@ public class WebController {
 
     private ChallongeClient challongeClient;
     private MatchService matchService;
+    private TournamentService tournamentService;
 
-    public WebController(ChallongeClient challongeClient, MatchService matchService){
+    public WebController(ChallongeClient challongeClient, MatchService matchService, TournamentService tournamentService){
         this.challongeClient = challongeClient;
         this.matchService = matchService;
+        this.tournamentService = tournamentService;
     }
 
     @GetMapping({ "/", "/index" })
     public String index(Model model) {
+        model.addAttribute("tournament", tournamentService.getModelTournament());
         model.addAttribute("matchs", matchService.getModelMatches());
         model.addAttribute("matchToSave", Match.builder().build());
         return "index";

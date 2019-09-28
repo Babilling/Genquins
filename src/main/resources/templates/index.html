@@ -108,13 +108,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>
-                    <p>&#9642; Tous les joueurs de chaque poule se rencontrent une fois (aller)</p>
-                    <p>&#9642; Le gagnant d'un match est le premier arrivé à 10 points</p>
-                    <p>&#9642; Concernant les pissettes et les demis, les joueurs doivent se mettre d'accord entre eux avant le match</p>
-                    <p>&#9642; Idem pour les sacs/rateaux</p>
-                    <p>&#9642; Les gamelles comptent comme  +1 ou -1, au choix du buteur</p>
-                    <p><i>Départage : Nombre de matchs remportés, puis goal average, puis points marqués.</i></p>
+                    <p th:object="${tournament}" th:utext="*{description}"></p>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="submit" class="btn btn-warning" data-dismiss="modal">Fermer</button>

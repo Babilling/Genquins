@@ -1,9 +1,6 @@
 package github.kaysoro.Genquins.service;
 
-import github.kaysoro.Genquins.payload.Match;
-import github.kaysoro.Genquins.payload.MatchWrapper;
-import github.kaysoro.Genquins.payload.Participant;
-import github.kaysoro.Genquins.payload.ParticipantWrapper;
+import github.kaysoro.Genquins.payload.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +10,7 @@ import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunctions;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 public class ChallongeClient {
@@ -60,5 +58,13 @@ public class ChallongeClient {
                     .forEach((name, values) -> values.forEach(value -> LOGGER.info("{}={}", name, value)));
             return next.exchange(clientRequest);
         };
+    }
+
+    public Mono<Tournament> getTournament() {
+        return webClient.get()
+                .uri("/tournaments/{tournamentId}.json", tournamentId)
+                .retrieve()
+                .bodyToMono(TournamentWrapper.class)
+                .map(TournamentWrapper::getTournament);
     }
 }
