@@ -13,5 +13,5 @@ RUN cd /genquins &&\
     rm -rf /genquins && \
     rm -rf /root/.m2
 
-CMD ["--challonge.username="${CHALLONGE_USERNAME}","--challonge.token="${CHALLONGE_TOKEN}","--challonge.parent.tournament="${CHALLONGE_PARENT_TOURNAMENT},"--challonge.child.tournaments="${CHALLONGE_CHILDREN_TOURNAMENTS}"]
+CMD ["--challonge.username="${CHALLONGE_USERNAME}","--challonge.token="${CHALLONGE_TOKEN}","--challonge.parent.tournament="${CHALLONGE_PARENT_TOURNAMENT}","--challonge.child.tournaments="${CHALLONGE_CHILDREN_TOURNAMENTS}"]
 ENTRYPOINT ["java","-jar","/genquins.jar"]
