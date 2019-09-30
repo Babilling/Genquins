@@ -34,6 +34,18 @@ public class WebController {
 
     @PostMapping("/save")
     public String save(Model model, Match matchToSave) {
+        matchToSave.setWinner_id(matchToSave.getParticipant1().getId());
+        int winnerScore = matchToSave.getParticipant1().getScore();
+
+        if (matchToSave.getParticipant2().getScore() > winnerScore){
+            matchToSave.setWinner_id(matchToSave.getParticipant2().getId());
+            matchToSave.setScores(matchToSave.getParticipant2().getScore()
+                    + "-" + matchToSave.getParticipant1().getScore());
+        }
+        else
+            matchToSave.setScores(matchToSave.getParticipant1().getScore()
+                    + "-" + matchToSave.getParticipant2().getScore());
+        challongeClient.submitScores(matchToSave);
         return "redirect:/";
     }
 

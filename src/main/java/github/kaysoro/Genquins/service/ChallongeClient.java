@@ -1,11 +1,14 @@
 package github.kaysoro.Genquins.service;
 
+import github.kaysoro.Genquins.mapper.MatchMapper;
 import github.kaysoro.Genquins.payload.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunctions;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -33,6 +36,17 @@ public class ChallongeClient {
                         .basicAuthentication(username, token))
                 .filter(logRequest())
                 .build();
+    }
+
+    public Mono<Match> submitScores(github.kaysoro.Genquins.model.Match match){
+        return webClient.put()
+                .uri("/tournaments/{tournamentId}/matches/{matchId}.json", tournamentId, match.getId())
+                .accept(MediaType.APPLICATION_JSON )
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .body(BodyInserters.fromObject(MatchMapper.map(match)))
+                .retrieve()
+                .bodyToMono(MatchWrapper.class)
+                .map(MatchWrapper::getMatch);
     }
 
     public Flux<Match> getAllMatchesForTournament() {

@@ -1,6 +1,7 @@
 package github.kaysoro.Genquins.mapper;
 
 import github.kaysoro.Genquins.model.Match;
+import github.kaysoro.Genquins.payload.MatchUpdate;
 import github.kaysoro.Genquins.payload.Participant;
 
 import java.util.Map;
@@ -20,5 +21,12 @@ public class MatchMapper {
     private static Participant getParticipantFromMap(String participantId, Map<String, Participant> participantMap) {
         if (participantMap.get(participantId) != null) return participantMap.get(participantId);
         return participantMap.entrySet().stream().filter(p -> p.getValue().getGroup_player_ids().contains(participantId)).collect(Collectors.toList()).get(0).getValue();
+    }
+
+    public static MatchUpdate map(Match match){
+        return MatchUpdate.builder()
+                .scores(match.getScores())
+                .winnerId(match.getWinner_id())
+                .build();
     }
 }

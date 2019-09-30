@@ -12,7 +12,8 @@ public class Match {
     private String winner_id;
     private String scores;
     private String state;
-    public Match(){};
+    public Match(){}
+
     public Match(String id, Participant participant1, Participant participant2, String winner_id, String scores, String state) {
         this.id = id;
         this.participant1 = participant1;
