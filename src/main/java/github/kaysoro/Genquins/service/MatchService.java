@@ -15,10 +15,10 @@ public class MatchService {
         this.challongeClient = challongeClient;
     }
 
-    public Flux<Match> getModelMatches() {
-        return challongeClient.getAllParticipantsForTournament()
+    public Flux<Match> getModelMatches(String tournamentId) {
+        return challongeClient.getAllParticipantsForTournament(tournamentId)
                 .collectMap(Participant::getId, participant -> participant)
-                .flatMapMany(participants -> challongeClient.getAllMatchesForTournament()
+                .flatMapMany(participants -> challongeClient.getAllMatchesForTournament(tournamentId)
                         .map(match -> MatchMapper.map(match, participants)));
         }
 }

@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public class MatchMapper {
     public static Match map(github.kaysoro.Genquins.payload.Match match, Map<String, Participant> participantMap){
         return Match.builder().id(match.getId())
+                .tournamentId(match.getTournament_id())
                 .participant1(ParticipantMapper.map(getParticipantFromMap(match.getPlayer1_id(),participantMap)))
                 .participant2(ParticipantMapper.map(getParticipantFromMap(match.getPlayer2_id(),participantMap)))
                 .winner_id(match.getWinner_id() != null ? getParticipantFromMap(match.getWinner_id(),participantMap).getName() : null)

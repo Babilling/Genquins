@@ -5,7 +5,9 @@ import github.kaysoro.Genquins.model.Tournament;
 
 public class TournamentMapper {
     public static Tournament map(github.kaysoro.Genquins.payload.Tournament tournament){
-        return Tournament.builder().description(tournament.getDescription())
+        return Tournament.builder()
+                .id(tournament.getId())
+                .description(tournament.getDescription())
                 .build();
     }
 }

@@ -20,7 +20,7 @@ public class TournamentService {
         this.challongeClient = challongeClient;
     }
 
-    public Mono<Tournament> getModelTournament() {
-        return challongeClient.getTournament().map(tournament -> TournamentMapper.map(tournament));
+    public Mono<Tournament> getModelTournament(String tournamentId) {
+        return challongeClient.getTournament(tournamentId).map(tournament -> TournamentMapper.map(tournament));
     }
 }

@@ -23,13 +23,13 @@ public class ChallongeController {
     }
 
     @GetMapping("/matches")
-    public Flux<Match> getMatchesFromCurrentRound() {
-       return challongeClient.getAllMatchesForTournament();
+    public Flux<Match> getMatchesFromCurrentRound(String tournamentId) {
+       return challongeClient.getAllMatchesForTournament(tournamentId);
     }
 
     @GetMapping("/participants")
-    public Flux<Participant> getParticipants() {
-        return challongeClient.getAllParticipantsForTournament();
+    public Flux<Participant> getParticipants(String tournamentId) {
+        return challongeClient.getAllParticipantsForTournament(tournamentId);
     }
 
     @ExceptionHandler(WebClientResponseException.class)

@@ -27,6 +27,12 @@
             </button>
         </div>
     </div>
+    <div class="alert alert-warning alert-dismissible fade show">
+        <strong>Alerte API pourrie !</strong> L'API de Challonge ne permettant pas de mettre à jour les scores sur des tournois ayant des phases de
+        poules, une intervention manuelle est nécessaire de la part des administrateurs pour que les scores et les classements s'actualisent.
+        Pas d'inquiétudes cependant, vos résultats sont en sécurité et toujours visibles sur la page d'accueil.
+        <button type="button" style="color: black !important;" class="close" data-dismiss="alert">&times;</button>
+    </div>
     <iframe th:src="@{https://challonge.com/fr/__${tournamentId}__/module}" width="100%" style="height: calc(100% - 115px);" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
 </div>
 <script th:src="@{/js/jquery-3.3.1.js}"></script>

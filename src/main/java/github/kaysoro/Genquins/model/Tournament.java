@@ -7,8 +7,11 @@ import lombok.Data;
 @Data
 public class Tournament {
     public Tournament(){};
-    public Tournament(String description){
+    public Tournament(String id, String description){
+        this.id = id;
         this.description = description;
-    };
+    }
+    private String id;
     private String description;
+
 }

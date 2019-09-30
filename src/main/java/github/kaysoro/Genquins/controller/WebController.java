@@ -9,15 +9,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 
 @Controller
 public class WebController {
-    @Value("${challonge.tournament}")
+    @Value("${challonge.parent.tournament}")
     private String tournamentId;
     private ChallongeClient challongeClient;
     private MatchService matchService;
     private TournamentService tournamentService;
+
+    @Value("#{'${challonge.child.tournaments}'.split(',')}")
+    private List<String> tournamentsIds;
 
     public WebController(ChallongeClient challongeClient, MatchService matchService, TournamentService tournamentService){
         this.challongeClient = challongeClient;
@@ -27,8 +35,8 @@ public class WebController {
 
     @GetMapping({ "/", "/index" })
     public String index(Model model) {
-        model.addAttribute("tournament", tournamentService.getModelTournament());
-        model.addAttribute("matchs", matchService.getModelMatches());
+        model.addAttribute("tournamentParent", tournamentService.getModelTournament(tournamentId));
+        model.addAttribute("matchs", Flux.fromStream(tournamentsIds.stream().map(id -> matchService.getModelMatches(id))).flatMap(Function.identity()));
         model.addAttribute("matchToSave", Match.builder().build());
         return "index";
     }

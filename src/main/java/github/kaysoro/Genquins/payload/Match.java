@@ -35,6 +35,9 @@ public class Match {
     @JsonProperty("group_id")
     private String group_id;
 
+    @JsonProperty("tournament_id")
+    private String tournament_id;
+
     public int getRound() {
         return round;
     }
@@ -97,5 +100,13 @@ public class Match {
 
     public void setGroup_id(String group_id) {
         this.group_id = group_id;
+    }
+
+    public String getTournament_id() {
+        return tournament_id;
+    }
+
+    public void setTournament_id(String tournament_id) {
+        this.tournament_id = tournament_id;
     }
 }

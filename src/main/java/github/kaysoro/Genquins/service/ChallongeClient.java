@@ -15,6 +15,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @Service
 public class ChallongeClient {
 
@@ -23,9 +25,6 @@ public class ChallongeClient {
     private static final Logger LOGGER = LoggerFactory.getLogger(ChallongeClient.class);
 
     private final WebClient webClient;
-
-    @Value("${challonge.tournament}")
-    private String tournamentId;
 
     public ChallongeClient(@Value("${challonge.username}") String username,
                            @Value("${challonge.token}") String token) {
@@ -40,16 +39,16 @@ public class ChallongeClient {
 
     public Mono<Match> submitScores(github.kaysoro.Genquins.model.Match match){
         return webClient.put()
-                .uri("/tournaments/{tournamentId}/matches/{matchId}.json", tournamentId, match.getId())
+                .uri("/tournaments/{tournamentId}/matches/{matchId}.json", match.getTournamentId(), match.getId())
                 .accept(MediaType.APPLICATION_JSON )
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromObject(MatchMapper.map(match)))
+                .body(BodyInserters.fromObject(new MatchUpdateWrapper(MatchMapper.map(match))))
                 .retrieve()
                 .bodyToMono(MatchWrapper.class)
                 .map(MatchWrapper::getMatch);
     }
 
-    public Flux<Match> getAllMatchesForTournament() {
+    public Flux<Match> getAllMatchesForTournament(String tournamentId) {
         return webClient.get()
                 .uri("/tournaments/{tournamentId}/matches.json", tournamentId)
                 .retrieve()
@@ -58,7 +57,7 @@ public class ChallongeClient {
                 .map(MatchWrapper::getMatch);
     }
 
-    public Flux<Participant> getAllParticipantsForTournament() {
+    public Flux<Participant> getAllParticipantsForTournament(String tournamentId) {
         return webClient.get()
                 .uri("/tournaments/{tournamentId}/participants.json", tournamentId)
                 .retrieve()
@@ -75,7 +74,7 @@ public class ChallongeClient {
         };
     }
 
-    public Mono<Tournament> getTournament() {
+    public Mono<Tournament> getTournament(String tournamentId) {
         return webClient.get()
                 .uri("/tournaments/{tournamentId}.json", tournamentId)
                 .retrieve()

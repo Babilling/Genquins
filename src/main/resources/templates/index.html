@@ -55,7 +55,7 @@
                 <div style="text-align:center">
                     <button th:disabled="${match.winner_id != null}" th:attr="data-participant1-name=${match.participant1.name}, data-participant2-name=${match.participant2.name},
                      data-participant1-id=${match.participant1.id}, data-participant2-id=${match.participant2.id},
-                     data-match-id=${match.id}, data-target='#scoresModal'"
+                     data-match-id=${match.id}, data-match-tournament-id=${match.tournamentId}, data-target='#scoresModal'"
                             type="button" data-toggle="modal" class="btn btn-warning" title="Rapporter les scores">
                         <i class="fa fa-check-square-o fa-lg" aria-hidden="true"></i>
                     </button>
@@ -73,21 +73,22 @@
                 </div>
                 <form id="saveForm" action="#" th:action="@{/save}" th:object="${matchToSave}" method="post">
                     <input type="hidden" id="matchToSaveId" th:field="*{id}">
+                    <input type="hidden" id="matchToSaveTournamentId" th:field="*{tournamentId}">
                     <input type="hidden" id="matchToSaveParticipant1Id" th:field="*{participant1.id}">
                     <input type="hidden" id="matchToSaveParticipant2Id" th:field="*{participant2.id}">
                     <div class="modal-body">
                         <div class="form-group row">
-                            <label for="participant1Score" class="col-sm-2 col-form-label"
+                            <label for="participant1Score" class="col-sm-8 col-form-label"
                                    id="participant1Name"></label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 <input type="number" max="10" class="form-control" id="participant1Score"
                                        th:field="*{participant1.score}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="participant2Score" class="col-sm-2 col-form-label"
+                            <label for="participant2Score" class="col-sm-8 col-form-label"
                                    id="participant2Name"></label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-4">
                                 <input type="number" max="10" class="form-control" id="participant2Score"
                                        th:field="*{participant2.score}">
                             </div>
@@ -108,7 +109,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p th:object="${tournament}" th:utext="*{description}"></p>
+                    <p th:object="${tournamentParent}" th:utext="*{description}"></p>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="submit" class="btn btn-warning" data-dismiss="modal">Fermer</button>
