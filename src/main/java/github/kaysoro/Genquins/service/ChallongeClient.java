@@ -40,6 +40,7 @@ public class ChallongeClient {
                 .uri("/tournaments/{tournamentId}/matches.json", tournamentId)
                 .retrieve()
                 .bodyToFlux(MatchWrapper.class)
+                .filter(m -> m.getMatch().getState().equals(Match.STATE_OPEN) || m.getMatch().getState().equals(Match.STATE_COMPLETE))
                 .map(MatchWrapper::getMatch);
     }
 
