@@ -5,6 +5,7 @@ import github.kaysoro.Genquins.model.Match;
 import github.kaysoro.Genquins.service.ChallongeClient;
 import github.kaysoro.Genquins.service.MatchService;
 import github.kaysoro.Genquins.service.TournamentService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,8 @@ import java.util.stream.Collectors;
 
 @Controller
 public class WebController {
-
+    @Value("${challonge.tournament}")
+    private String tournamentId;
     private ChallongeClient challongeClient;
     private MatchService matchService;
     private TournamentService tournamentService;
@@ -43,6 +45,7 @@ public class WebController {
 
     @GetMapping("/challonge")
     public String challonge(Model model) {
+        model.addAttribute("tournamentId",tournamentId);
         return "challonge";
     }
 

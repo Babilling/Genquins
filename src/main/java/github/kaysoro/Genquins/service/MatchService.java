@@ -26,7 +26,7 @@ public class MatchService {
 
     public Flux<Match> getModelMatches() {
         return challongeClient.getAllParticipantsForTournament()
-                .collectMap(p -> p.getGroup_player_ids().get(0), participant -> participant)
+                .collectMap(p -> (p.getGroup_player_ids() != null && !p.getGroup_player_ids().isEmpty()) ? p.getGroup_player_ids().get(0) : p.getId(), participant -> participant)
                 .flatMapMany(participants -> challongeClient.getAllMatchesForTournament()
                         .map(match -> MatchMapper.map(match, participants)));
         }
