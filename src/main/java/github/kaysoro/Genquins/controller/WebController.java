@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import reactor.core.publisher.Mono;
 
 @Controller
 public class WebController {
@@ -45,7 +46,10 @@ public class WebController {
         else
             matchToSave.setScores(matchToSave.getParticipant1().getScore()
                     + "-" + matchToSave.getParticipant2().getScore());
-        challongeClient.submitScores(matchToSave);
+        Mono<github.kaysoro.Genquins.payload.Match> matchSaved = challongeClient.submitScores(matchToSave);
+        matchSaved
+                .flatMap(match -> Mono.just(match.getScores_csv()))
+                .subscribe();
         return "redirect:/";
     }
 

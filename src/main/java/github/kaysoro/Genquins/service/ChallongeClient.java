@@ -42,7 +42,7 @@ public class ChallongeClient {
         return webClient.put()
                 .uri("/tournaments/{tournamentId}/matches/{matchId}.json", tournamentId, match.getId())
                 .accept(MediaType.APPLICATION_JSON )
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromObject(MatchMapper.map(match)))
                 .retrieve()
                 .bodyToMono(MatchWrapper.class)
