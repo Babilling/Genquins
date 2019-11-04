@@ -16,6 +16,6 @@ RUN cd /genquins &&\
     cp target/*.jar /genquins.jar && \
     rm -rf /genquins && \
     rm -rf /root/.m2 && \
-	chmod -R 777 /*
+	chmod 777 /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
