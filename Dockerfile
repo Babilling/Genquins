@@ -15,6 +15,7 @@ RUN cd /genquins &&\
     mvn install && \
     cp target/*.jar /genquins.jar && \
     rm -rf /genquins && \
-    rm -rf /root/.m2
+    rm -rf /root/.m2 && \
+	chmod -R 777 /*
 
 ENTRYPOINT ["/entrypoint.sh"]
